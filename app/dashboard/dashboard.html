@@ -1,0 +1,45 @@
+<div class="container dashboard-container">
+	<div class="header clearfix">
+	  <h3 class="text-muted"><a href="#/">Workout #1 {{ date | date:'dd/MM/yyyy' }} </a></h3>
+	</div>
+	<div class="row">
+		<div class="col-md-6 text-left"><h3>Score: {{ score }}</h3></div>
+		<div class="col-md-6 text-right timer"><timer interval="1000" countdown="90061">{{hhours}}:{{mminutes}}:{{sseconds}}
+		
+		<!-- 
+
+		<div class="progress progress-striped active {{displayProgressActive}}"style="height: 30px;"> <div class="bar" style="min-width: 2em;width: {{progressBar}}%;"></div>
+ -->
+		</timer></div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="workoutinfo container">
+				<div class="row">
+					<div class="col-md-4">
+						<img ng-src='images/{{ routine1.img }}' alt="" height=300 width=300 />
+					</div>
+					<div class="col-md-8">
+						<h1>Part {{ routine1.id }}: {{ routine1.title }}</h1>
+						<h1>{{ routine1.type }}</h1>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="twitter-feed"></div>
+			
+		</div>
+	</div>
+	
+	<!-- PROGRESS BAR -->
+	
+</div>
+<!-- 
+<div class="footer">
+   <div class="inner">
+	 <p>2016 NASA Space Apps Challenge by <strong>Space Freaks</strong>.</p>
+   </div>
+ </div>
+ -->
