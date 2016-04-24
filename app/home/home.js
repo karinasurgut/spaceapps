@@ -9,6 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 .controller('HomeCtrl', ['$scope','$http', function($scope, $http) {
+
 //var url = "http://localhost:8888/reveldeleteapi/public/api/v1";
 
 // $http.get(url)

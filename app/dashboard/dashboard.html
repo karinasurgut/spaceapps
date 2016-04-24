@@ -1,45 +1,80 @@
+<div class="header clearfix">
+	<div class="col-md-6"><h3 class="text-muted"><a href="#/">Cardio Training {{ date | date:'dd/MM/yyyy' }} </a> <small class="">Helps you maintain heart health</small></h3></div>
+	<div class="col-md-6 text-right"><div class="cheering">{{ cheerMessage }} <i class="em em-clap"></i><i class="em em-muscle"></i></div></div>
+</div>
 <div class="container dashboard-container">
-	<div class="header clearfix">
-	  <h3 class="text-muted"><a href="#/">Workout #1 {{ date | date:'dd/MM/yyyy' }} </a></h3>
-	</div>
+	<div class="row"><div class="well well-sm">
+		<div class="col-sm-2">
+			<img ng-src="images/face.jpg" class="img-circle">
+		</div>
+		<div class="col-sm-10">
+			<div class="col-sm-2">
+			<h4>John Smith</h4>
+			<h3>Age 30</h3>
+			</div>
+			<div class="col-sm-2">
+			<p>Health: <span class="label label-default">84%</span></p>
+			<p>Weight: <span class="label label-default">87kg</span></p>
+			<p>Height: <span class="label label-default">186cm</span></p>
+			</div>
+			<div class="col-sm-3">
+			<p>Best score: <span class="label label-success">10,000</span></p>
+			<p>Longest session: <span class="label label-success">03:14</span></p>
+			<p>Longest streak: <span class="label label-success">33</span></p>
+			</div>
+			<div class="col-md-3 text-right">
+			 <button ng-click="connectButton()" id="connectButton" type="button" class="btn btn-sm btn-default">Connect Twitter</button>
+			 <br>
+			 
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div></div>
 	<div class="row">
-		<div class="col-md-6 text-left"><h3>Score: {{ score }}</h3></div>
-		<div class="col-md-6 text-right timer"><timer interval="1000" countdown="90061">{{hhours}}:{{mminutes}}:{{sseconds}}
-		
-		<!-- 
-
-		<div class="progress progress-striped active {{displayProgressActive}}"style="height: 30px;"> <div class="bar" style="min-width: 2em;width: {{progressBar}}%;"></div>
- -->
-		</timer></div>
-	</div>
-	<div class="row">
-		<div class="col-md-8">
-			<div class="workoutinfo container">
+		<div class="col-md-8 workout-info">
+			<div class="text-center" ng-show ="!timerstarted">
+				<button ng-click = "startWorkout()" type="button" ng-disabled="timerRunning" class="btn btn-lg btn-danger">Start Workout</button>
+			</div>
+			<div class="workoutinfo container" ng-if="timerstarted">
 				<div class="row">
-					<div class="col-md-4">
-						<img ng-src='images/{{ routine1.img }}' alt="" height=300 width=300 />
+					<div class="col-md-3">
+						<img ng-src='images/{{ routine[rid].img }}' alt="" height=200 width=200 />
 					</div>
-					<div class="col-md-8">
-						<h1>Part {{ routine1.id }}: {{ routine1.title }}</h1>
-						<h1>{{ routine1.type }}</h1>
+					<div class="col-md-9">
+					
+						<h3 class="text-primary">Stage {{ routine[rid].stage_id }}: {{ routine[rid].stage }}</h3>
+						<h2>{{ routine[rid].title }} <small>{{ routine[rid].type }}</small></h2>
+						<p>Working on {{ routine[rid].muscles }}.</p>
+						<div class="" id="countdown-timer">
+						<div class="timer-circle">
+							 <span class="countdown-timer bg-danger">{{ timeLeft }}</span>
+							<button ng-click="pauseExercise()" ng-disabled="timerRunning" class="btn btn-sm btn-danger">Pause</button>
+						<button ng-click="nextExercise()" class="margin-left-2px btn btn-sm btn-default">Skip</button>
+						</div>
 						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="twitter-feed"></div>
+			<div class="twitter-feed">
+				<div class="" id="results">
+					<div class="tweet fade-in" ng-repeat="t in mentions" ><blockquote class="twitter-tweet"><p ng-bind-html="t.text"></p>
+— {{t.user.name}} {{ t.created_at | date:'dd-MM-yyyy' }}</blockquote></div>
+					<div ng-show="rateLimitError">
+						Oops! Request limit reached.
+					</div>
+					<div>
+						<br/>
+						<!-- <input type="button" class="btn btn-info" id="load-more" ng-click="refreshTimeline(tweets[tweets.length-1].id)" ng-show="connectedTwitter" value="Load More" /> -->
+					</div>
+				</div>
+			
+			</div>
 			
 		</div>
 	</div>
 	
-	<!-- PROGRESS BAR -->
-	
+		
 </div>
-<!-- 
-<div class="footer">
-   <div class="inner">
-	 <p>2016 NASA Space Apps Challenge by <strong>Space Freaks</strong>.</p>
-   </div>
- </div>
- -->

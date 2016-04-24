@@ -30,6 +30,8 @@
 }
 
 body{
+background: url('images/bg.jpg') no-repeat;
+background-size: cover;
     /* 
 background: rgba(0,251,138,1);
 background: -moz-linear-gradient(45deg, rgba(0,251,138,1) 0%, rgba(0,156,173,1) 62%, rgba(24,126,158,1) 99%, rgba(25,125,158,1) 100%);
@@ -45,4 +47,92 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00fb8a', end
 a:hover,a:focus {
 	text-decoration:none;
 	color:#333;
+}
+
+.timer-circle {
+font-size:50px;
+margin-top:40px;
+}
+
+.timer-circle span {
+padding: 10px;
+background: #00FF4E;
+}
+.workout-info{
+padding: 20px;
+border: 1px solid red;
+border-radius: 3px;
+background: rgba(246, 246, 246, 0.8);
+}
+.well {
+    background-color: rgba(245, 245, 245, 0.8);
+}
+.header {
+background: white;
+padding: 0 20px;
+}
+.margin-left-2px{
+margin-left:2px;
+}
+
+/* Tweet css */
+blockquote.twitter-tweet {
+  display: inline-block;
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 0 5px 10px 0px;
+  padding: 0 16px 16px 16px;
+  max-width: 468px;
+  width: 100%;
+  background: white;
+  padding: 10px;
+}
+ 
+blockquote.twitter-tweet p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+}
+ 
+blockquote.twitter-tweet a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+  outline: 0 none;
+}
+ 
+blockquote.twitter-tweet a:hover,
+blockquote.twitter-tweet a:focus {
+  text-decoration: underline;
+}
+
+/* ALERT FADE OUT */
+
+@keyframes fadeOut
+{
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
+@-webkit-keyframes fadeIn 
+{
+  from { opacity: 0.0 }
+  to { opacity: 1.0 }
+}
+
+.fade-in
+{ 
+  animation: fadeIn 2s 1;
+  -webkit-animation: fadeIn 2s 1;
+}
+.cheering{
+    font-size: 30px;
+    padding: 10px;
 }
