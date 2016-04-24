@@ -5,12 +5,12 @@
 <div class="container dashboard-container">
 	<div class="row"><div class="well well-sm">
 		<div class="col-sm-2">
-			<img ng-src="images/face.jpg" class="img-circle">
+			<img ng-src="images/Astronaut.png" class="img-circle">
 		</div>
 		<div class="col-sm-10">
 			<div class="col-sm-2">
-			<h4>John Smith</h4>
-			<h3>Age 30</h3>
+			<h3>Anthony So</h3>
+			<h4>Age 30</h4>
 			</div>
 			<div class="col-sm-2">
 			<p>Health: <span class="label label-default">84%</span></p>
@@ -43,13 +43,13 @@
 					<div class="col-md-9">
 					
 						<h3 class="text-primary">Stage {{ routine[rid].stage_id }}: {{ routine[rid].stage }}</h3>
-						<h2>{{ routine[rid].title }} <small>{{ routine[rid].type }}</small></h2>
+						<h2>{{ routine[rid].title }}</h2>
 						<p>Working on {{ routine[rid].muscles }}.</p>
 						<div class="" id="countdown-timer">
 						<div class="timer-circle">
 							 <span class="countdown-timer bg-danger">{{ timeLeft }}</span>
-							<button ng-click="pauseExercise()" ng-disabled="timerRunning" class="btn btn-sm btn-danger">Pause</button>
-						<button ng-click="nextExercise()" class="margin-left-2px btn btn-sm btn-default">Skip</button>
+							<button ng-click="pauseExercise()" ng-disabled="timerRunning" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-pause"></i></button>
+						<button class="margin-left-2px btn btn-sm btn-default"><i class="glyphicon glyphicon-forward"></i></button>
 						</div>
 						
 						</div>
@@ -61,10 +61,12 @@
 			<div class="twitter-feed">
 				<div class="" id="results">
 					<div class="tweet fade-in" ng-repeat="t in mentions" ><blockquote class="twitter-tweet"><p ng-bind-html="t.text"></p>
-— {{t.user.name}} {{ t.created_at | date:'dd-MM-yyyy' }}</blockquote></div>
+— {{t.user.name}} <!-- {{ t.created_at | date:'dd-MM-yyyy' }} --></blockquote></div>
 					<div ng-show="rateLimitError">
 						Oops! Request limit reached.
 					</div>
+					<div class="tweet fade-in tweet-self" ng-show="timerrunning"><blockquote class="twitter-tweet"><p ng-bind-html="selft.text"></p>
+— {{selft.user.name}} <!-- {{ t.created_at | date:'dd-MM-yyyy' }} --></blockquote></div>
 					<div>
 						<br/>
 						<!-- <input type="button" class="btn btn-info" id="load-more" ng-click="refreshTimeline(tweets[tweets.length-1].id)" ng-show="connectedTwitter" value="Load More" /> -->

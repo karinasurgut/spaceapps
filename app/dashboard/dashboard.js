@@ -8,9 +8,7 @@ angular.module('myApp.dashboard', ['ngRoute'])
   });
 }])
 .controller('DashboardCtrl', ['$scope','$http','$q', 'twitterService','$timeout','$interval', function($scope, $http, $q, twitterService,$timeout,$interval) {
-	//$scope.score = 24;
 	$scope.date = new Date();
-	//$scope.countdown = 12;
 	$scope.timeLeft = "";
 	$scope.timerrunning = false;
 	$scope.timerstarted= false;
@@ -19,24 +17,24 @@ angular.module('myApp.dashboard', ['ngRoute'])
 	$scope.mentionsNumber = 0;
 	
 	$scope.routine=[
-		{
-			id: 1,
-			stage_id: 1,
-			title:'Light walk',
-			stage:'Warm-up',
-			type: 'Cardio',
-			duration_sec:60,
-			img:'walk.png',
-			muscles:'legs, back, core',
-			equipment: 'Conan'
-		},
+		// {
+// 			id: 1,
+// 			stage_id: 1,
+// 			title:'Light walk',
+// 			stage:'Warm-up',
+// 			type: 'Cardio',
+// 			duration_sec:60,
+// 			img:'walk.png',
+// 			muscles:'legs, back, core',
+// 			equipment: 'Conan'
+// 		},
 		{
 			id: 2,
 			stage_id: 1,
 			title:'Squats',
 			stage:'Warm-up',
 			type: 'Cardio',
-			duration_sec:30,
+			duration_sec:20,
 			img:'squat.png',
 			muscles:'legs and back',
 			equipment: 'aRed'
@@ -47,7 +45,7 @@ angular.module('myApp.dashboard', ['ngRoute'])
 			title:'Lunges',
 			stage:'Warm-up',
 			type: 'Cardio',
-			duration_sec:30,
+			duration_sec:20,
 			img:'lungeleft.png',
 			muscles:'legs and back',
 			equipment: 'Conan'
@@ -129,7 +127,6 @@ angular.module('myApp.dashboard', ['ngRoute'])
 	
 	$scope.startCountdown = function(){
 		$scope.timerrunning = true;
-		console.log("inside countdown");
 		if ($scope.countdown > -1){
 		
 			var promise = $interval(function () {
@@ -141,7 +138,6 @@ angular.module('myApp.dashboard', ['ngRoute'])
 						seconds = $scope.countdown % 60;
 					
 						$scope.countdown -=1;
-						console.log($scope.countdown);
 						$scope.timeLeft =  [
 							minutes + 'm',
 							seconds + 's'
@@ -149,7 +145,6 @@ angular.module('myApp.dashboard', ['ngRoute'])
 					} else {
 						seconds = $scope.countdown;
 						$scope.countdown -=1;
-						console.log($scope.countdown);
 						$scope.timeLeft= seconds + 's';
 					}
 				} else {
@@ -194,12 +189,12 @@ angular.module('myApp.dashboard', ['ngRoute'])
         });
     }
     
-    $scope.getMentions = function(since_id) {
+    $scope.getMentions = function() {
     	console.log("inside get mentions");
     	var promiseMentions = $interval(function () {
-    		console.log("do mention api call");
+    		//console.log("do mention api call");
     		$scope.mentions=[];
-			twitterService.getMentions(since_id).then(function(data) {
+			twitterService.getMentions().then(function(data) {
 				$scope.mentions = $scope.mentions.concat(data);
 				console.log("$scope.mentionsNumber and $scope.mentions.length" + $scope.mentionsNumber + " " + $scope.mentions.length);
 				if ($scope.mentionsNumber  < $scope.mentions.length){
@@ -213,13 +208,14 @@ angular.module('myApp.dashboard', ['ngRoute'])
 			}, function() {
 				$scope.rateLimitError = true;
 			});
-		}, 50000);
+		},20000);
     }
 	
 	$scope.tweetStart = function() {
         if (twitterService.isReady()) {
             twitterService.tweetWorkout().then(function(data) {
             $scope.startTweetId = data.id;
+            $scope.selft = data;
             $scope.startTweetCreatedAt = data.created_at;
         }, function() {
             $scope.tweetStartError = true;
@@ -234,17 +230,11 @@ angular.module('myApp.dashboard', ['ngRoute'])
     	console.log($scope.routine);
     	console.log("start workout");
     	console.log($scope.routine[$scope.rid].duration_sec);
-    	// $scope.$apply(function() {
         $scope.countdown = $scope.routine[$scope.rid].duration_sec;
-        // });
-		//$scope.startTimer();
-		
 		$scope.startCountdown();
-		
+		$scope.tweetStart();
+		console.log("after startCountdown");
 		$scope.getMentions();
-		//$scope.addSeconds($scope.countdown);
-
-    	//start countdown
     }
     
     
@@ -252,6 +242,10 @@ angular.module('myApp.dashboard', ['ngRoute'])
     $scope.nextExercise = function() {
 		console.log("next exercise");
 		console.log($scope.rid + " " + $scope.routine.length);
+		console.log("check if another timer is running:");
+		// if ($scope.$parent.countdown > 0) {
+// 			$interval.cancel(promise);
+// 		}
 		if ($scope.rid < $scope.routine.length){
 			$scope.rid += 1;
 			console.log($scope.rid);
@@ -284,16 +278,5 @@ angular.module('myApp.dashboard', ['ngRoute'])
         $scope.connectedTwitter = true;
         //$scope.getMentions($scope.startTweetId);
         //$scope.refreshTimeline();
-    }
-	
-//var url = "http://localhost:8888/reveldeleteapi/public/api/v1";
-
-// $http.get(url)
-//   .success(function(data){
-//     $scope.info = data;
-//   })
-//   .error(function(err){
-//     return err;
-//   });
-
+	}
 }]);

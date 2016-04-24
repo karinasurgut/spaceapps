@@ -58,7 +58,7 @@ angular.module('myApp.services', []).factory('twitterService', function($q,$time
             console.log("Sending API call to twitter");
 
         	var deferred = $q.defer();
-        	var url ='/1.1/statuses/update.json?status=I%27m%20starting%20my%20morning%20workout.Tweet%20at%20me%20to%20cheer';
+        	var url ='/1.1/statuses/update.json?status=I%27m+starting+my+morning+%23cardio+on+ISS.+Tweet+%40sydneyastrocize+to+cheer%21';
 			var promise = authorizationResult.post(url).done(function(data) {
 				deferred.resolve(data);
 			}).fail(function(err) {

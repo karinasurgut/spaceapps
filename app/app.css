@@ -113,6 +113,10 @@ blockquote.twitter-tweet a:focus {
   text-decoration: underline;
 }
 
+.tweet-self blockquote.twitter-tweet{
+border-color:green;
+}
+
 /* ALERT FADE OUT */
 
 @keyframes fadeOut
